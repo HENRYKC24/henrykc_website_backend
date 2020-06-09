@@ -1,6 +1,6 @@
 const express = require('express');
 
-//set up app
+//set app
 const app = express();
 
 app.get('/api/customers', (req, res) => {
