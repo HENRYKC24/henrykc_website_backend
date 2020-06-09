@@ -1,0 +1,19 @@
+.socials,
+.copyright {
+  background-color: #333;
+  color: white;
+  text-align: center;
+}
+
+.socials {
+  font-size: 2rem;
+}
+
+.socials span {
+  margin: 1%;
+}
+
+.socials a {
+  text-decoration: none;
+  color: white;
+}

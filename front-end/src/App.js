@@ -1,4 +1,7 @@
 import React, {Component} from 'react';
+import Nav from './components/Nav';
+import Footer from './components/Footer';
+import './App.css'
 
 class App extends Component {
   constructor() {
@@ -26,9 +29,9 @@ class App extends Component {
 
     return (
       <div>
-        {this.state.customers.map(customer => <p key={customer.id}>{customer.firstName} {customer.lastName}</p>)}
         
-        
+        <Nav />
+        <Footer />
       </div>
     );
   }
