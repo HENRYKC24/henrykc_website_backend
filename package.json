@@ -1,0 +1,25 @@
+{
+  "name": "henrykc_website_backend",
+  "version": "1.0.0",
+  "description": "My personal website",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HENRYKC24/henrykc_website_backend.git"
+  },
+  "author": "Engr. Henry KC",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HENRYKC24/henrykc_website_backend/issues"
+  },
+  "homepage": "https://github.com/HENRYKC24/henrykc_website_backend#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "concurrently": "^5.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.18"
+  }
+}
