@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import Nav from './components/Nav';
 import Footer from './components/Footer';
+import ProfilePic from './pages/home/ProfilePic';
+import Title from './components/Title';
 import './App.css'
 
 class App extends Component {
@@ -29,8 +31,9 @@ class App extends Component {
 
     return (
       <div>
-        
+        <Title />
         <Nav />
+        <ProfilePic />
         <Footer />
       </div>
     );
