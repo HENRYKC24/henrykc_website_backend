@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-class ProfilePic extends Component {
+class UdemyCert extends Component {
   render() {
     return (
       <div className="container">
         <div style={{margin: 'auto'}} className="row">
           <img 
             className="col-lg-6 col-md-6 profile-pic" 
-            src="images/devC.jpg" 
+            src="images/udemyCert.jpg" 
             alt="My profile picture"
           />
           <div className="col-lg-6 col-md-6">
@@ -29,4 +29,4 @@ class ProfilePic extends Component {
   }
 }
 
-export default ProfilePic;
+export default UdemyCert;

@@ -1,9 +1,13 @@
 import React, {Component} from 'react';
+import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import Nav from './components/Nav';
 import Footer from './components/Footer';
 import ProfilePic from './pages/home/ProfilePic';
+import WithPoorChildren from './pages/home/WithPoorChildren';
 import Title from './components/Title';
+import Section1 from './components/Section1';
 import './App.css'
+import UdemyCert from './pages/home/UdemyCert';
 
 class App extends Component {
   constructor() {
@@ -30,12 +34,26 @@ class App extends Component {
   render() {
 
     return (
-      <div>
-        <Title />
-        <Nav />
-        <ProfilePic />
-        <Footer />
-      </div>
+      <Router>
+        <div>
+          
+          <Route exact={true} path='/' render={() => (
+            <div>
+              <Title />
+              <Nav />
+              <ProfilePic />
+              <WithPoorChildren />
+              <UdemyCert />
+              <Section1 />
+              <Footer />
+            </div>
+          )} />
+          <Route exact={true} path='/about' render={() => (
+            <><Nav />
+            <h1>This is the about page</h1></>
+          )} />
+        </div>
+      </Router>
     );
   }
 

@@ -3,9 +3,13 @@ import React from 'react';
 class Title extends React.Component {
   render() {
     return (
-      <div className="container">
-        <div className="row">
-          <h1>I am kc de programmer</h1>
+      <div className="container-fluid">
+        <div style={{margin: 'auto'}} className="row">
+          
+          <div className="col-lg-6 col-md-6">
+           <p>Henry De programmer</p>
+          
+          </div>
         </div>
       </div>
     )

@@ -1,8 +1,17 @@
+.sticky {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
 .profile-pic {
-  width: auto;
-  height: auto;
-  border-radius: 100%;
+  width: 100%;
+  /* border-radius: 100%; */
   margin: 2% auto;
+}
+
+.centered {
+  text-align: center;
 }
 
 .socials,
@@ -10,6 +19,14 @@
   background-color: #333;
   color: white;
   text-align: center;
+}
+
+p {
+  margin-top: 20px;
+}
+
+.container {
+  margin-bottom: 40px;
 }
 
 .socials {
@@ -23,4 +40,8 @@
 .socials a {
   text-decoration: none;
   color: white;
+}
+
+.short {
+  margin: 15px;
 }

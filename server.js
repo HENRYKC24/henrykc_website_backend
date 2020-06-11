@@ -1,4 +1,9 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+
+//connect mongoose
+// mongoose.connect('mogodb://localhost:27017/blogPostDB', { useNewUrlParser: true });
 
 //set app
 const app = express();
