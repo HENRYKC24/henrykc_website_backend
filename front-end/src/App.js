@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 import Nav from './components/Nav';
 import Footer from './components/Footer';
 import ProfilePic from './pages/home/ProfilePic';
 import WithPoorChildren from './pages/home/WithPoorChildren';
 import Title from './components/Title';
 import Section1 from './components/Section1';
+import IntroPics from './components/IntroPics';
 import './App.css'
 import UdemyCert from './pages/home/UdemyCert';
 
@@ -41,6 +42,7 @@ class App extends Component {
             <div>
               <Title />
               <Nav />
+              <IntroPics />
               <ProfilePic />
               <WithPoorChildren />
               <UdemyCert />

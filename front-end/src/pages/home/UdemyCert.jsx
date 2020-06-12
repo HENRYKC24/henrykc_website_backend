@@ -8,7 +8,7 @@ class UdemyCert extends Component {
           <img 
             className="col-lg-6 col-md-6 profile-pic" 
             src="images/udemyCert.jpg" 
-            alt="My profile picture"
+            alt="My Udemy cert"
           />
           <div className="col-lg-6 col-md-6">
            <p> Lorem, ipsum dolor sit amet consectetur adipisicing 

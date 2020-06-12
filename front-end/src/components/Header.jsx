@@ -1,9 +1,9 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
-function Nav() {
+function Header() {
   return (
-    <div className="sticky">
+    <div className="container-fluid sticky">
       
       <nav style={{backgroundColor: '#eee'}} 
         className="navbar navbar-expand-sm navbar-light text-white"
@@ -28,13 +28,13 @@ function Nav() {
           
           <ul className="navbar-nav">
             <li className="nav-item">
-              <Link className="nav-link" to='/blog'>BLOG <span className="sr-only">(current)</span></Link>
+              <a className="nav-link" href="#">BLOG <span className="sr-only">(current)</span></a>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to='/contact'>CONTACT</Link>
+              <a className="nav-link" href="#">CONTACT</a>
             </li>
             <li className="nav-item">
-              <Link className="nav-link"to='/about' aria-disabled="true">ABOUT</Link>
+              <a className="nav-link" href="#" aria-disabled="true">ABOUT</a>
             </li>
           </ul>
           
@@ -44,5 +44,5 @@ function Nav() {
   )
 }
 
-export default Nav;
+export default Header;
 
