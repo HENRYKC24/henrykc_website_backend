@@ -4,38 +4,35 @@ import styled from 'styled-components';
 class IntroPics extends React.Component {
   render() {
     return (
-
-      <CustomStyle className="container-fluid">
-        <div className="row container-fluid">
+      <ParentDiv className='container-fluid'>
+        <div className="row">
           <div className="col-lg-6 col-md-6">
-            <img className="col-lg-12 col-md-12" src="images/trimed_profile3.png" alt="profile" />
+            <img className="col-lg-8 col-md-12 col-sm-8" src="images/trimed_profile3.png" alt="my profile avatar" />
           </div>
-          <DivStyle className="col-lg-6 col-md-6 white-background">
+          <TextContainer  className="col-lg-6 col-md-6 my-auto">
             <PStyle>
-              Henry Kelechukwu (KC) is my name. <br /><br />I am a 
-              passionate software developer. I build websites / blogs.
+              I am a passionate software developer. I build websites / blogs. I also teach computer programming.
             </PStyle>
-          </DivStyle>
+          </TextContainer>
+
         </div>
-      </CustomStyle>
+      </ParentDiv>
     )
   }
-};
+}
 
 export default IntroPics;
 
-
-const CustomStyle = styled.div`
-  background: url(images/intro-background-pic-gray.jpg);
-`;
-
-const DivStyle = styled.div`
-  line-height: 5rem;
-  color: rgb(20, 20, 20);
-  text-shadow: 3px 3px #f95757;
-  font-size: 3rem;
+const ParentDiv = styled.div`
+  background-image: url(images/intro-background-pic-gray.jpg);
 `;
 
 const PStyle = styled.p`
-  padding: 100px 0;
+  color: #fff;
+  text-shadow: 2px 2px red;
+  font-size: 3rem;
+`;
+
+const TextContainer = styled.div`
+  line-heigt: 100%;
 `;

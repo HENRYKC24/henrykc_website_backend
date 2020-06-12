@@ -1,22 +1,13 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
-import Nav from './components/Nav';
+import Header from './components/Header';
+import Body from './components/Body'
 import Footer from './components/Footer';
-import ProfilePic from './pages/home/ProfilePic';
-import WithPoorChildren from './pages/home/WithPoorChildren';
-import Title from './components/Title';
-import Section1 from './components/Section1';
-import IntroPics from './components/IntroPics';
-import './App.css'
-import UdemyCert from './pages/home/UdemyCert';
+import About from './pages/about/AboutMe'
+import './App.css';
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      customers: []
-    }
-  }
+  
   componentDidMount() {
     // fetch('/come', {
     //   headers : { 
@@ -40,20 +31,19 @@ class App extends Component {
           
           <Route exact={true} path='/' render={() => (
             <div>
-              <Title />
-              <Nav />
-              <IntroPics />
-              <ProfilePic />
-              <WithPoorChildren />
-              <UdemyCert />
-              <Section1 />
+              <Header />
+              <Body />
               <Footer />
             </div>
           )} />
+
           <Route exact={true} path='/about' render={() => (
-            <><Nav />
-            <h1>This is the about page</h1></>
+            <>
+            <Header />
+            <About />
+            </>
           )} />
+
         </div>
       </Router>
     );
