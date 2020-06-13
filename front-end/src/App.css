@@ -45,3 +45,10 @@ p {
 .short {
   margin: 15px;
 }
+
+@media screen and (max-width: 780px) {
+  .header-text {
+    font-size: small;
+    color: red;
+  }
+}

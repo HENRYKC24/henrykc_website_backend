@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import Header from './components/Header';
-import Body from './components/Body'
+import Body from './components/Body';
 import Footer from './components/Footer';
-import About from './pages/about/AboutMe'
-import Blog from './pages/blog/Blog'
-import Contact from './pages/contact/Contact'
+import About from './pages/about/AboutMe';
+import Blog from './pages/blog/Blog';
+import Contact from './pages/contact/Contact';
+import Compose from './pages/blog/Compose';
 import './App.css';
 
 class App extends Component {
@@ -57,6 +58,13 @@ class App extends Component {
             <>
             <Header />
             <Contact />
+            </>
+          )} />
+
+          <Route exact={true} path='/compose' render={() => (
+            <>
+            <Header />
+            <Compose />
             </>
           )} />
 

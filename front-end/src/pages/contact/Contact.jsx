@@ -2,7 +2,7 @@ import React from 'react';
 
 class Contact extends React.Component {
   componentDidMount() {
-    document.title = 'Contact - KC';
+    document.title = 'Contact-Henry KC';
   }
   render() {
     return (

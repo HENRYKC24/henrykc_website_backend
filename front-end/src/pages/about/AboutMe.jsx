@@ -2,7 +2,7 @@ import React from 'react';
 
 class AboutMe extends React.Component {
   componentDidMount() {
-    document.title = 'About - KC';
+    document.title = 'About-Henry KC';
   }
   render() {
     return (

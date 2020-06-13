@@ -2,7 +2,7 @@ import React from 'react';
 
 class Blog extends React.Component {
   componentDidMount() {
-    document.title = 'Blog - KC';
+    document.title = 'Blog-Henry KC';
   }
   render() {
     return (

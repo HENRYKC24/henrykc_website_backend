@@ -6,15 +6,21 @@ function Header() {
   return (
       <>
       <HeaderBackground className='container-fluid'>
-        <div className="row">
+        <div className="row .header-text">
             <RoundImage src="images/preWed.png" alt="rounded profile"/>
           
-            <SpanStyle className="my-auto col-lg-4 col-md-4 col-sm-2
-            col-xs-2">Henry KC</SpanStyle>
-            <SpanStyle2 className="my-auto col-lg-6 col-md-6 col-sm-6 col-xs-4 d-flex flex-row-reverse">For the love of computer programming...</SpanStyle2>
-          
+            <SpanStyle 
+              className="my-auto col-lg-4 col-md-4 col-sm-3 col-xs-2">
+              Henry KC
+            </SpanStyle>
+
+            <SpanStyle2 
+              className="my-auto col-lg-6 col-md-6 col-sm-6 d-flex flex-row-reverse">
+              For the love of computer programming...
+            </SpanStyle2>
         </div>
       </HeaderBackground>
+
       <div className="sticky">
         
         <nav style={{backgroundColor: '#eee'}} 
@@ -75,8 +81,11 @@ const HeaderBackground = styled.div`
 
 const SpanStyle = styled.span`
   display: block;
+  width: auto;
+  font-size: larger;
 `;
 
 const SpanStyle2 = styled.span`
   margin-left: auto;
+  font-style: italic;
 `;
