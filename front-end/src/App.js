@@ -4,6 +4,8 @@ import Header from './components/Header';
 import Body from './components/Body'
 import Footer from './components/Footer';
 import About from './pages/about/AboutMe'
+import Blog from './pages/blog/Blog'
+import Contact from './pages/contact/Contact'
 import './App.css';
 
 class App extends Component {
@@ -41,6 +43,20 @@ class App extends Component {
             <>
             <Header />
             <About />
+            </>
+          )} />
+
+          <Route exact={true} path='/blog' render={() => (
+            <>
+            <Header />
+            <Blog />
+            </>
+          )} />
+
+          <Route exact={true} path='/contact' render={() => (
+            <>
+            <Header />
+            <Contact />
             </>
           )} />
 

@@ -29,7 +29,7 @@ const ParentDiv = styled.div`
 
 const PStyle = styled.p`
   color: #fff;
-  text-shadow: 2px 2px red;
+  text-shadow: 2px 2px #a00;
   font-size: 3rem;
 `;
 

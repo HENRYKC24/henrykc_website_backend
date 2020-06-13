@@ -1,8 +1,8 @@
 import React from 'react';
 
-class AboutMe extends React.Component {
+class Contact extends React.Component {
   componentDidMount() {
-    document.title = 'About - KC';
+    document.title = 'Contact - KC';
   }
   render() {
     return (
@@ -25,4 +25,4 @@ class AboutMe extends React.Component {
   }
 };
 
-export default AboutMe;
+export default Contact;

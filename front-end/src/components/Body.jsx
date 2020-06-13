@@ -6,6 +6,9 @@ import IntroPics from './IntroPics';
 import UdemyCert from '../pages/home/UdemyCert';
 
 class Body extends React.Component {
+  componentDidMount() {
+    document.title = 'Home'
+  }
   render() {
     return (
       <>

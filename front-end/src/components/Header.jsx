@@ -1,8 +1,20 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import styled from 'styled-components';
 
 function Header() {
   return (
+      <>
+      <HeaderBackground className='container-fluid'>
+        <div className="row">
+            <RoundImage src="images/preWed.png" alt="rounded profile"/>
+          
+            <SpanStyle className="my-auto col-lg-4 col-md-4 col-sm-2
+            col-xs-2">Henry KC</SpanStyle>
+            <SpanStyle2 className="my-auto col-lg-6 col-md-6 col-sm-6 col-xs-4 d-flex flex-row-reverse">For the love of computer programming...</SpanStyle2>
+          
+        </div>
+      </HeaderBackground>
       <div className="sticky">
         
         <nav style={{backgroundColor: '#eee'}} 
@@ -41,8 +53,30 @@ function Header() {
           </div>
         </nav>
       </div>
+      </>
   )
 }
 
 export default Header;
 
+const RoundImage = styled.img`
+  width: 80px;
+  height: 80px;
+  border: 5px solid white;
+  border-radius: 100%;
+  margin: 5px;
+`;
+
+const HeaderBackground = styled.div`
+  background-color: #222;
+  background-repeat: no-repeat;
+  color: #ccc;
+`;
+
+const SpanStyle = styled.span`
+  display: block;
+`;
+
+const SpanStyle2 = styled.span`
+  margin-left: auto;
+`;
