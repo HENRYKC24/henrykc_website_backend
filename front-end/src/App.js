@@ -11,21 +11,6 @@ import './App.css';
 
 class App extends Component {
   
-  componentDidMount() {
-    // fetch('/come', {
-    //   headers : { 
-    //     'Content-Type': 'application/json',
-    //     'Accept': 'application/json'
-    //    }
-
-    // })
-    // .then((response) => response.json())
-    // .then((messages) => {console.log("messages");});
-    fetch('/api/customers')
-      .then(res => res.json())
-      .then(customers => this.setState({customers}, () => console.log('Customers fetched..', customers)));
-  }
-
   render() {
 
     return (

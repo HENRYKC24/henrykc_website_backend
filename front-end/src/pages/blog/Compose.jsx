@@ -1,19 +1,24 @@
 import React from 'react';
-const bodyParser = require('body-parser');
+import Footer from '../../components/Footer';
 
 class Compose extends React.Component {
   constructor() {
     super();
     this.state = {
-      loggedIn: false
+      loggedIn: 0
     };
   }
+
   componentDidMount() {
     
   }
+
   render() {
     return (
-      this.state.loggedIn ? <div className="container">
+      this.state.loggedIn 
+      ?
+      <div>
+      <div className="container">
         <form action="/compose" method="POST">
 
           <div class="form-group">
@@ -34,7 +39,24 @@ class Compose extends React.Component {
               
           <button type="submit" name="submit" class="btn btn-primary">Publish</button>
         </form>
-      </div> : <div>please log in</div>
+      </div> 
+        <Footer />
+        </div>
+      : 
+      <><div className="container col-lg-4 text-center">
+       <form method="POST" action="/admin-compose-credential" class="form-signin">
+       <img class="mb-4" src="images/preWed.png" alt="for log in" width="72" height="72" />
+       <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+       <label for="inputEmail" class="sr-only">Email address</label>
+       <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus />
+       <label for="inputPassword" name="password" class="sr-only">Password</label>
+       <input type="password" id="inputPassword" class="form-control" placeholder="Password" required />
+       
+       <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+     </form>
+      </div>
+      <Footer />
+      </>
     )
   }
 };
