@@ -1,5 +1,7 @@
 const express = require('express');
+const fileUpload = require('express-fileupload');
 const bodyParser = require('body-parser');
+const path = require('path');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const SaltRounds = 10;
@@ -9,7 +11,7 @@ mongoose.connect('mongodb://localhost:27017/henryKCWebsiteDB', { useNewUrlParser
 // create schema
 const blogSchema = {
   title: String,
-  file: String,
+  image: String,
   content: String,
   time: String
 };
@@ -26,18 +28,18 @@ const Admin = mongoose.model('Admin', adminSchema);
 
 const post = Post({
   title: 'First Post',
-  file: 'This file',
+  image: 'This file',
   content: 'This content is massive.',
   time: 'Tue Apr 7, 2020'
 });
 
 
-  bcrypt.hash('', SaltRounds, (err, hash) => {
-    const admin = Admin({
-      password: hash
-    });
-    // admin.save();
+bcrypt.hash('', SaltRounds, (err, hash) => {
+  const admin = Admin({
+    password: hash
   });
+  // admin.save();
+});
 
 
 
@@ -45,40 +47,34 @@ const post = Post({
 
 //set app
 const app = express();
+app.use(express.static('./public'))
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
-app.get('/api/customers', (req, res) => {
-  const customers = [
-    {id:1, firstName: 'John', lastName: 'Doe'},
-    {id:2, firstName: 'Steve', lastName: 'Smith'},
-    {id:3, firstName: 'Mary', lastName: 'Swanson'}
-  ];
-  res.json(customers);
-});
 
 
-app.post('/compose', (req, res) => {
-  const title = req.body.title;
-  const post = req.body.post;
-  const time = new Date().toDateString();
-  res.send('You actually made it to the server!');
+// set the upload
+
+
+
+
+
+app.post('/upload', (req, res) => {
+  console.log(req.files.data);
 })
 
-app.post('/admin-compose-credential', (req, res) => {
-  const password = req.body.password;
-  console.log(req.body);
-  // res.send('password: ' + req.body.password);
+app.post('/admin', (req, res) => {
+  const neededString = ((req.body.body));
   Admin.findOne((err, result) => {
-    console.log(result);
-    bcrypt.compare(req.body.password, result.password, (err, boolean) => {
-      console.log(boolean);
-      res.send(boolean);
-    })
+    if(!err) {
+      bcrypt.compare(neededString, result.password, (err, boolean) => {
+        res.send(boolean);
+      })
+    } else {
+      console.log(err);
+    }
   })
-  bcrypt.compare(req.body.password,)
 })
-
 
 const port = 5000;
 app.listen(port, () => console.log('Server running on port ' + port));
