@@ -74,7 +74,8 @@ const RoundImage = styled.img`
 `;
 
 const HeaderBackground = styled.div`
-  background-color: #222;
+  background-color: #333;
+  ;
   background-repeat: no-repeat;
   color: #ccc;
 `;

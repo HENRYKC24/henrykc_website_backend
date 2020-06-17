@@ -1,6 +1,7 @@
 import React from 'react';
 import Footer from '../../components/Footer';
 import axios from 'axios';
+import styled from 'styled-components';
 
 class Compose extends React.Component {
   constructor() {
@@ -11,7 +12,10 @@ class Compose extends React.Component {
       title: '',
       password: '',
       file: '',
-      fileName: ''
+      fileName: '',
+      loggedInErr: true,
+      uploadStatus: '',
+      uploadedImage: ''
     };
     this.handlePasswordInput = this.handlePasswordInput.bind(this);
     this.handleClick = this.handleClick.bind(this);
@@ -64,13 +68,30 @@ class Compose extends React.Component {
 
   async onSubmit(e) {
     e.preventDefault();
-    const {file} = this.state;
+    const {title, post} = this.state;
     const formData = new FormData();
-    formData.append('data', file);
-    const response = await axios.post('/upload', formData, {
-      headers: {"Content-Type": "multipart/form-data"}
-    });
-    console.log(response);
+    formData.append('file', this.state.file);
+    formData.append('info', JSON.stringify({title, post}))
+
+    try {
+      const response = await axios.post('/upload', formData, {
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "multipart/form-data"
+        }
+      });
+      const {msg, filePath} = (response.data);
+      console.log(msg, filePath);
+      this.setState(prevState => {
+        return {
+          ...prevState,
+          uploadStatus: msg,
+          uploadedImage: filePath
+        }
+      })
+    } catch( err ) {
+      console.log(err);
+    }
     // const serverResponse = response.data;
   }
 
@@ -90,7 +111,8 @@ class Compose extends React.Component {
     this.setState(prevState => {
       return {
         ...this.state,
-        loggedIn: returnedData
+        loggedIn: returnedData,
+        loggedInErr: returnedData
       }
     })
   }
@@ -115,7 +137,7 @@ class Compose extends React.Component {
               id="title" 
             />
           </div>
-
+          <span style={{color: this.state.uploadStatus[0] === 'F' ? '#060' : '#a00'}}>{this.state.uploadStatus}</span>
           <div className="form-group">
             <label htmlFor="title">Upload file</label>
             <input 
@@ -142,12 +164,14 @@ class Compose extends React.Component {
               
           <button type="submit" name="submit" className="btn btn-primary">Publish</button>
         </form>
+        {this.state.uploadedImage ? <img src={this.state.uploadedImage} alt="Now img"/> : null}
       </div> 
         <Footer />
         </div>
       : 
-      <><div className="container col-lg-4 text-center">
-       <form method="POST" action="/admin-compose-credential" className="form-signin">
+      <><div className="container col-lg-4 col-md-6 col-sm-6 text-center pt-3">
+        <ErroH4>{!this.state.loggedInErr ? 'Wrong email or password' : null}</ErroH4>
+       <form method="POST" action="/admin-compose-credential" className="form-signin mt-5">
        <img className="mb-4" src="images/preWed.png" alt="for log in" width="72" height="72" />
        <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
        <label htmlFor="inputEmail" className="sr-only">Email address</label>
@@ -159,12 +183,12 @@ class Compose extends React.Component {
         onChange={this.handlePasswordInput} 
         value={this.state.password}
         id="inputPassword" 
-        className="form-control" 
+        className="form-control mt-3" 
         placeholder="Password" 
         required
       />
        
-       <button className="btn btn-lg btn-primary btn-block" onClick={this.handleClick} type="button">Sign in</button>
+       <button className="btn btn-lg btn-primary btn-block mt-3 mb-5" onClick={this.handleClick} type="button">Sign in</button>
      </form>
       </div>
       <Footer />
@@ -174,3 +198,7 @@ class Compose extends React.Component {
 };
 
 export default Compose;
+
+const ErroH4 = styled.h4`
+ color: #a00;
+`;

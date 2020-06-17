@@ -12,7 +12,7 @@ mongoose.connect('mongodb://localhost:27017/henryKCWebsiteDB', { useNewUrlParser
 const blogSchema = {
   title: String,
   image: String,
-  content: String,
+  post: String,
   time: String
 };
 
@@ -29,7 +29,7 @@ const Admin = mongoose.model('Admin', adminSchema);
 const post = Post({
   title: 'First Post',
   image: 'This file',
-  content: 'This content is massive.',
+  post: 'This content is massive.',
   time: 'Tue Apr 7, 2020'
 });
 
@@ -47,6 +47,7 @@ bcrypt.hash('', SaltRounds, (err, hash) => {
 
 //set app
 const app = express();
+app.use(fileUpload());
 app.use(express.static('./public'))
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
@@ -60,11 +61,36 @@ app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
 
 app.post('/upload', (req, res) => {
-  console.log(req.files.data);
+  if( !req.files ) {
+    return res.json({msg: 'No file selected'});
+  }
+  const {title, post} = JSON.parse(req.body.info);
+  console.log(title, post);
+  if (!title || !post) {
+    return res.json({msg: 'No post title or body'});
+  }
+  const file = req.files.file;
+  const fileNameInServer = `uploaded-image-${Date.now()}${file.name}`;
+  file.mv(`${__dirname}/public/blog-images/${fileNameInServer}`, err => {
+    if( err ) {
+      return res.send(err);
+    }
+  });
+
+  const newPost = Post({
+    title,
+    post,
+    image: fileNameInServer,
+    time: new Date().toDateString()
+  });
+
+  newPost.save();
+  res.json({msg: 'File successfully uploaded', filePath: `${__dirname}/public/blog-images/${fileNameInServer}`});
+  
 })
 
 app.post('/admin', (req, res) => {
-  const neededString = ((req.body.body));
+  const {body: neededString} = ((req.body));
   Admin.findOne((err, result) => {
     if(!err) {
       bcrypt.compare(neededString, result.password, (err, boolean) => {
