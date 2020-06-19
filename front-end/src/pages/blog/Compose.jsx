@@ -2,6 +2,7 @@ import React from 'react';
 import Footer from '../../components/Footer';
 import axios from 'axios';
 import styled from 'styled-components';
+import {Redirect} from 'react';
 
 class Compose extends React.Component {
   constructor() {
@@ -96,6 +97,7 @@ class Compose extends React.Component {
     } catch( err ) {
       console.log(err);
     }
+    
     // const serverResponse = response.data;
   }
 

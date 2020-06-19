@@ -31,17 +31,21 @@ class Blog extends React.Component {
   render() {
     const {postsArray} = this.state;
     console.log(postsArray);
-    const postComponents = postsArray.map(
-      post => <SingleBlogPost 
+    const postComponents = postsArray.reverse().map(
+      (post, index) => <SingleBlogPost 
+        key={index}
         title={post.title} 
         img={post.image} 
         post={post.post} 
         time={post.time} 
+        id={post._id}
       />
     );
     return (
       <div className="container">
-        {postComponents}
+        <div className="row">
+          {postComponents}
+        </div>
       </div>
     )
   }

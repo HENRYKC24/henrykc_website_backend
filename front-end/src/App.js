@@ -29,6 +29,7 @@ class App extends Component {
             <>
             <Header />
             <About />
+            <Footer />
             </>
           )} />
 
@@ -36,6 +37,7 @@ class App extends Component {
             <>
             <Header />
             <Blog />
+            <Footer />
             </>
           )} />
 
@@ -43,6 +45,7 @@ class App extends Component {
             <>
             <Header />
             <Contact />
+            <Footer />
             </>
           )} />
 
@@ -50,6 +53,7 @@ class App extends Component {
             <>
             <Header />
             <Compose />
+            <Footer />
             </>
           )} />
 

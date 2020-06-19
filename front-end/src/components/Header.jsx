@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import styled from 'styled-components';
 
 function Header() {
@@ -39,20 +39,20 @@ function Header() {
   
           <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
-              <li className="nav-item active">
-                <Link className="nav-link" to="/">HOME <span className="sr-only">(current)</span></Link>
+              <li className="nav-item">
+                <NavLink activeStyle={{borderBottom: '2px solid'}} exact className="nav-link" to="/">HOME <span className="sr-only">(current)</span></NavLink>
               </li>
             </ul>
             
             <ul className="navbar-nav">
               <li className="nav-item">
-                <Link className="nav-link" to='/blog'>BLOG <span className="sr-only">(current)</span></Link>
+                <NavLink activeStyle={{borderBottom: '2px solid'}} exact className="nav-link" to='/blog'>BLOG <span className="sr-only">(current)</span></NavLink>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to='/contact'>CONTACT</Link>
+                <NavLink activeStyle={{borderBottom: '2px solid'}} exact className="nav-link" to='/contact'>CONTACT</NavLink>
               </li>
               <li className="nav-item">
-                <Link className="nav-link"to='/about' aria-disabled="true">ABOUT</Link>
+                <NavLink activeStyle={{borderBottom: '2px solid'}} exact className="nav-link"to='/about' aria-disabled="true">ABOUT</NavLink>
               </li>
             </ul>
             
