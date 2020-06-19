@@ -13,7 +13,7 @@ class Compose extends React.Component {
       password: '',
       file: '',
       fileName: '',
-      loggedInErr: true,
+      loggedInErr: false,
       uploadStatus: '',
       uploadedImage: ''
     };
@@ -23,6 +23,10 @@ class Compose extends React.Component {
     this.handleFile = this.handleFile.bind(this);
     this.handlePost = this.handlePost.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    document.title = 'Compose Blog - Henry KC'
   }
 
   handlePasswordInput(e) {
@@ -110,9 +114,9 @@ class Compose extends React.Component {
     
     this.setState(prevState => {
       return {
-        ...this.state,
+        ...prevState,
         loggedIn: returnedData,
-        loggedInErr: returnedData
+        loggedInErr: !returnedData
       }
     })
   }
@@ -164,13 +168,13 @@ class Compose extends React.Component {
               
           <button type="submit" name="submit" className="btn btn-primary">Publish</button>
         </form>
-        {this.state.uploadedImage ? <img src={this.state.uploadedImage} alt="Now img"/> : null}
+        {this.state.uploadedImage ? <img src={this.state.uploadedImage} alt="Now img"/> : ''}
       </div> 
         <Footer />
         </div>
       : 
       <><div className="container col-lg-4 col-md-6 col-sm-6 text-center pt-3">
-        <ErroH4>{!this.state.loggedInErr ? 'Wrong email or password' : null}</ErroH4>
+        <ErroH4>{this.state.loggedInErr ? 'Wrong email or password' : null}</ErroH4>
        <form method="POST" action="/admin-compose-credential" className="form-signin mt-5">
        <img className="mb-4" src="images/preWed.png" alt="for log in" width="72" height="72" />
        <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>

@@ -34,7 +34,7 @@ const post = Post({
 });
 
 
-bcrypt.hash('', SaltRounds, (err, hash) => {
+bcrypt.hash('h', SaltRounds, (err, hash) => {
   const admin = Admin({
     password: hash
   });
@@ -54,7 +54,16 @@ app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
 
 
-// set the upload
+// get blogs
+app.get('/getBlogs', (req, res) => {
+  Post.find({}, (err, posts) => {
+    if( !err ) {
+      res.json(posts);
+    } else {
+      console.log(err);
+    }
+  })
+})
 
 
 
@@ -65,15 +74,15 @@ app.post('/upload', (req, res) => {
     return res.json({msg: 'No file selected'});
   }
   const {title, post} = JSON.parse(req.body.info);
-  console.log(title, post);
   if (!title || !post) {
     return res.json({msg: 'No post title or body'});
   }
   const file = req.files.file;
   const fileNameInServer = `uploaded-image-${Date.now()}${file.name}`;
-  file.mv(`${__dirname}/public/blog-images/${fileNameInServer}`, err => {
+  file.mv(`${__dirname}/front-end/public/uploads/${fileNameInServer}`, err => {
     if( err ) {
-      return res.send(err);
+      console.log(err);
+      return res.status(500).send(err);
     }
   });
 
@@ -85,8 +94,12 @@ app.post('/upload', (req, res) => {
   });
 
   newPost.save();
-  res.json({msg: 'File successfully uploaded', filePath: `${__dirname}/public/blog-images/${fileNameInServer}`});
-  
+  res.json(
+    {
+      msg: 'File successfully uploaded',
+      filePath: `/uploads/${fileNameInServer}`
+    }
+  );
 })
 
 app.post('/admin', (req, res) => {
