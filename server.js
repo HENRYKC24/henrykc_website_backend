@@ -1,7 +1,6 @@
 const express = require('express');
 const fileUpload = require('express-fileupload');
 const bodyParser = require('body-parser');
-const path = require('path');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const SaltRounds = 10;
@@ -65,7 +64,15 @@ app.get('/getBlogs', (req, res) => {
   })
 })
 
-
+app.get('/showSingle/:id', (req, res) => {
+  Post.findOne({_id: req.params.id}, (err, result) => {
+    if( !err ) {
+      res.json(result);
+    } else {
+      console.log(err);
+    }
+  })
+})
 
 
 
@@ -78,13 +85,32 @@ app.post('/upload', (req, res) => {
     return res.json({msg: 'No post title or body'});
   }
   const file = req.files.file;
-  const fileNameInServer = `uploaded-image-${Date.now()}${file.name}`;
+
+  const removeLeadingDots = (input) => {
+    let result = '', index, counter = 0;
+    for( let i = 0; i < input.length; i++ ) {
+      if (input[i] === '.' ) {
+        index = i;
+      }
+    }
+    for ( let i = 0; i < input.length; i++) {
+      if( input[i] === '.' && i !== index ) {
+        continue;
+      }
+      result += input[i];
+    }
+    return result;
+  }
+
+  const fileNameInServer = `uploaded-image-${Date.now()}${removeLeadingDots(file.name)}`;
   file.mv(`${__dirname}/front-end/public/uploads/${fileNameInServer}`, err => {
     if( err ) {
       console.log(err);
       return res.status(500).send(err);
     }
   });
+
+
 
   const newPost = Post({
     title,

@@ -7,12 +7,12 @@ import About from './pages/about/AboutMe';
 import Blog from './pages/blog/Blog';
 import Contact from './pages/contact/Contact';
 import Compose from './pages/blog/Compose';
+import ShowSinglePost from './pages/blog/ShowSinglePost';
 import './App.css';
 
 class App extends Component {
   
-  render() {
-
+  render(params) {
     return (
       <Router>
         <div>
@@ -53,6 +53,14 @@ class App extends Component {
             <>
             <Header />
             <Compose />
+            <Footer />
+            </>
+          )} />
+
+          <Route exact path={'/singlePost/'} render={() => (
+            <>
+            <Header />
+            <ShowSinglePost />
             <Footer />
             </>
           )} />

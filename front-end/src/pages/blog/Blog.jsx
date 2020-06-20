@@ -3,10 +3,11 @@ import axios from 'axios';
 import SingleBlogPost from './SingleBlogPost';
 
 class Blog extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
-      postsArray: []
+      postsArray: [],
+      singlePost: {}
     }
   };
 
@@ -16,33 +17,51 @@ class Blog extends React.Component {
       const postsArray = res.data;
       console.log(postsArray);
       this.setState({
-        postsArray: (postsArray)
+        ...this.state,
+        postsArray: postsArray.reverse()
       });
     } catch(err) {
       console.log(err);
     }
   }
-
+  
+  async displaySinglePost(id) {
+    try {
+      const res = await axios.get('/showSingle/' + id);
+      const singlePost = res.data;
+      console.log(singlePost);
+      this.setState({
+        postsArray: [singlePost]
+      });
+    } catch(err) {
+      console.log(err);
+    }
+  }
+  
   componentDidMount() {
     document.title = 'Blog-Henry KC';
-    this.getBlogPosts();
+    if (this.props.id) {
+      this.displaySinglePost(this.props.id);
+    } else {
+      this.getBlogPosts();
+    }
   }
 
   render() {
+    console.log(this.props)
     const {postsArray} = this.state;
-    console.log(postsArray);
-    const postComponents = postsArray.reverse().map(
+    const postComponents = postsArray.map(
       (post, index) => <SingleBlogPost 
         key={index}
         title={post.title} 
         img={post.image} 
         post={post.post} 
         time={post.time} 
-        id={post._id}
+        id1={post._id}
       />
     );
     return (
-      <div className="container">
+      <div className="container text-center">
         <div className="row">
           {postComponents}
         </div>
