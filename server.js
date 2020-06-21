@@ -19,12 +19,9 @@ const adminSchema = {
   password: String
 };
 
-
 // Create models
-
 const Post = mongoose.model('Post', blogSchema);
 const Admin = mongoose.model('Admin', adminSchema);
-
 
 bcrypt.hash('h', SaltRounds, (err, hash) => {
   const admin = Admin({
@@ -33,8 +30,6 @@ bcrypt.hash('h', SaltRounds, (err, hash) => {
   // admin.save();
 });
 
-
-
 //set app
 const app = express();
 app.use(fileUpload());
@@ -42,17 +37,32 @@ app.use(express.static('./public'))
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
+// get routes
 
+app.get('/getNumberOfPosts', (req, res) => {
+  Post.find({}, (err, result) => {
+    if( !err ) {
+      res.json({totalPosts: result.length})
+    } else {
+      console.log(err)
+    }
+  })
+})
 
-// get blogs
-app.get('/getBlogs', (req, res) => {
+app.get('/getBlogs/:skip', (req, res) => {
+  let skip = 0, limit = 6;
+  if( req.params.skip) {
+    skip = Number(req.params.skip);
+  } else {
+    skip = 0;
+  }
   Post.find({}, (err, posts) => {
     if( !err ) {
       res.json(posts);
     } else {
       console.log(err);
     }
-  })
+  }).sort({$natural:-1}).skip(skip).limit(limit);
 })
 
 app.get('/showSingle/:id', (req, res) => {
@@ -65,11 +75,9 @@ app.get('/showSingle/:id', (req, res) => {
   })
 })
 
-
-
 app.post('/upload', (req, res) => {
   const file = req.files.file;
-
+  const {title, post} = JSON.parse(req.body.info);
   const removeLeadingDots = (input) => {
     let result = '', index;
     for( let i = 0; i < input.length; i++ ) {
@@ -95,8 +103,6 @@ app.post('/upload', (req, res) => {
       return res.status(500).send(err);
     }
   });
-
-
 
   const newPost = Post({
     title,

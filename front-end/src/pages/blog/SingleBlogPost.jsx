@@ -20,8 +20,8 @@ function SingleBlogPost(props) {
 
   return (
     <div className='col-lg-4 col-md-4 col-sm-6 mt-5'>
-      <H3styles>{title}</H3styles>
-      <div>
+      <h3>{title}</h3>
+      <div className=''>
         <ImgStyle src={`uploads/${img}`} alt={img} />
       </div>
       <p>{time}</p>
@@ -39,10 +39,10 @@ function SingleBlogPost(props) {
 export default SingleBlogPost;
 
 const ImgStyle = styled.img`
-  width: 100%;
+  width: 90%;
   height: 200px;
 `;
 
-const H3styles = styled.h3`
+const h3 = styled.h3`
   text-align: center;
 `;

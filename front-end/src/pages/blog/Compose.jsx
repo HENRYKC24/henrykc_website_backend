@@ -43,7 +43,8 @@ class Compose extends React.Component {
     this.setState(prevState => {
       return {
         ...prevState,
-        title: value
+        title: value,
+        uploadStatus: ''
       }
     })
   }
@@ -54,7 +55,8 @@ class Compose extends React.Component {
       return {
         ...prevState,
         file: file,
-        fileName: file.name
+        fileName: file.name,
+        uploadStatus: ''
       }
     })
   }
@@ -64,18 +66,19 @@ class Compose extends React.Component {
     this.setState(prevState => {
       return {
         ...prevState,
-        post: value
+        post: value,
+        uploadStatus: ''
       }
     })
   }
 
   async onSubmit(e) {
     e.preventDefault();
-    const {post, title} = this.state;
-    if( !post || !title ) {
+    const {post, title, file} = this.state;
+    if( !post || !title || !file ) {
       this.setState({
         ...this.state,
-        uploadStatus: 'Empty title or post'
+        uploadStatus: 'No empty input(s)'
       });
       return;
     }
@@ -84,7 +87,7 @@ class Compose extends React.Component {
     if( type !== 'image' || !wantedTypes.includes(extension) ) {
       this.setState({
         ...this.state,
-        uploadStatus: 'Wrong file type'
+        uploadStatus: 'Only jpeg, gif, png and webp images are allowed'
       });
       return;
     }
@@ -110,8 +113,6 @@ class Compose extends React.Component {
     } catch( err ) {
       console.log(err);
     }
-    
-    // const serverResponse = response.data;
   }
 
   async handleClick() {
@@ -142,13 +143,15 @@ class Compose extends React.Component {
       ?
       <div>
       <div className="container">
-        <h1>Compose a blog post</h1>
+        <h1>Compose blog post:</h1>
+        <span style={{color: this.state.uploadStatus[0] === 'F' ? '#060' : '#a00'}}>{this.state.uploadStatus}</span>
         <form onSubmit={this.onSubmit}>
 
           <div className="form-group">
             <label htmlFor="title">Title</label>
             <input 
               onChange={this.handleTitle} 
+              onFocus={this.handleTitle} 
               value={this.state.title} 
               type="text" 
               name="title" 
@@ -156,7 +159,6 @@ class Compose extends React.Component {
               id="title" 
             />
           </div>
-          <span style={{color: this.state.uploadStatus[0] === 'F' ? '#060' : '#a00'}}>{this.state.uploadStatus}</span>
           <div className="form-group">
             <label htmlFor="title">Upload file</label>
             <input 
@@ -171,6 +173,7 @@ class Compose extends React.Component {
           <div className="form-group">
             <label htmlFor="post">Post</label>
             <textarea 
+              onFocus={this.handlePost}
               onChange={this.handlePost} 
               value={this.state.post} 
               className="form-control" 
