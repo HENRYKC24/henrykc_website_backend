@@ -25,13 +25,6 @@ const adminSchema = {
 const Post = mongoose.model('Post', blogSchema);
 const Admin = mongoose.model('Admin', adminSchema);
 
-const post = Post({
-  title: 'First Post',
-  image: 'This file',
-  post: 'This content is massive.',
-  time: 'Tue Apr 7, 2020'
-});
-
 
 bcrypt.hash('h', SaltRounds, (err, hash) => {
   const admin = Admin({
@@ -41,8 +34,6 @@ bcrypt.hash('h', SaltRounds, (err, hash) => {
 });
 
 
-
-// post.save();
 
 //set app
 const app = express();
@@ -77,17 +68,10 @@ app.get('/showSingle/:id', (req, res) => {
 
 
 app.post('/upload', (req, res) => {
-  if( !req.files ) {
-    return res.json({msg: 'No file selected'});
-  }
-  const {title, post} = JSON.parse(req.body.info);
-  if (!title || !post) {
-    return res.json({msg: 'No post title or body'});
-  }
   const file = req.files.file;
 
   const removeLeadingDots = (input) => {
-    let result = '', index, counter = 0;
+    let result = '', index;
     for( let i = 0; i < input.length; i++ ) {
       if (input[i] === '.' ) {
         index = i;
@@ -97,7 +81,9 @@ app.post('/upload', (req, res) => {
       if( input[i] === '.' && i !== index ) {
         continue;
       }
-      result += input[i];
+      if( input[i] !== ' ' ) {
+        result += input[i];
+      }
     }
     return result;
   }

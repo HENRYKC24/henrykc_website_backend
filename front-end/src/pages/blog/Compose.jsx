@@ -1,8 +1,6 @@
 import React from 'react';
-import Footer from '../../components/Footer';
 import axios from 'axios';
 import styled from 'styled-components';
-import {Redirect} from 'react';
 
 class Compose extends React.Component {
   constructor() {
@@ -73,7 +71,23 @@ class Compose extends React.Component {
 
   async onSubmit(e) {
     e.preventDefault();
-    const {title, post} = this.state;
+    const {post, title} = this.state;
+    if( !post || !title ) {
+      this.setState({
+        ...this.state,
+        uploadStatus: 'Empty title or post'
+      });
+      return;
+    }
+    const [type, extension] = this.state.file.type.split('/');
+    const wantedTypes = ['jpeg', 'gif', 'png', 'webp'];
+    if( type !== 'image' || !wantedTypes.includes(extension) ) {
+      this.setState({
+        ...this.state,
+        uploadStatus: 'Wrong file type'
+      });
+      return;
+    }
     const formData = new FormData();
     formData.append('file', this.state.file);
     formData.append('info', JSON.stringify({title, post}))
@@ -86,7 +100,6 @@ class Compose extends React.Component {
         }
       });
       const {msg, filePath} = (response.data);
-      console.log(msg, filePath);
       this.setState(prevState => {
         return {
           ...prevState,
@@ -170,9 +183,11 @@ class Compose extends React.Component {
               
           <button type="submit" name="submit" className="btn btn-primary">Publish</button>
         </form>
+        <div className="row">
+
         {this.state.uploadedImage ? <img src={this.state.uploadedImage} alt="Now img"/> : ''}
+        </div>
       </div> 
-        <Footer />
         </div>
       : 
       <><div className="container col-lg-4 col-md-6 col-sm-6 text-center pt-3">
@@ -197,7 +212,6 @@ class Compose extends React.Component {
        <button className="btn btn-lg btn-primary btn-block mt-3 mb-5" onClick={this.handleClick} type="button">Sign in</button>
      </form>
       </div>
-      <Footer />
       </>
     )
   }

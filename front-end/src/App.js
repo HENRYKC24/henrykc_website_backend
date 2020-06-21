@@ -16,55 +16,45 @@ class App extends Component {
     return (
       <Router>
         <div>
+          <Header />
           
           <Route exact={true} path='/' render={() => (
             <div>
-              <Header />
               <Body />
-              <Footer />
             </div>
           )} />
 
           <Route exact={true} path='/about' render={() => (
             <>
-            <Header />
             <About />
-            <Footer />
             </>
           )} />
 
           <Route exact={true} path='/blog' render={() => (
             <>
-            <Header />
             <Blog />
-            <Footer />
             </>
           )} />
 
           <Route exact={true} path='/contact' render={() => (
             <>
-            <Header />
             <Contact />
-            <Footer />
             </>
           )} />
 
           <Route exact={true} path='/compose' render={() => (
             <>
-            <Header />
             <Compose />
-            <Footer />
             </>
           )} />
 
           <Route exact path={'/singlePost/'} render={() => (
             <>
-            <Header />
             <ShowSinglePost />
-            <Footer />
             </>
           )} />
 
+          <Footer />
         </div>
       </Router>
     );

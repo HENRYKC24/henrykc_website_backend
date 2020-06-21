@@ -1,8 +1,6 @@
 import React, {useState} from 'react';
 import {Redirect} from 'react-router-dom';
 import styled from 'styled-components';
-import axios from 'axios';
-import Blog from './Blog';
 
 function SingleBlogPost(props) {
   const [postId, setPostId] = useState(false);
@@ -16,16 +14,15 @@ function SingleBlogPost(props) {
   }
 
   const runNow = () => {
-    console.log(383);
     localStorage.setItem('data', JSON.stringify(props));
     return <Redirect to='/singlePost' />
   }
 
   return (
     <div className='col-lg-4 col-md-4 col-sm-6 mt-5'>
-      <h3>{title}</h3>
+      <H3styles>{title}</H3styles>
       <div>
-        <ImgStyle src={`/uploaded-image-15926522302992019-12-30 05.47.02`} alt={img} />
+        <ImgStyle src={`uploads/${img}`} alt={img} />
       </div>
       <p>{time}</p>
       <div>
@@ -37,7 +34,6 @@ function SingleBlogPost(props) {
       {postId ? runNow() : null}
     </div>
   )
-  
 }
 
 export default SingleBlogPost;
@@ -45,4 +41,8 @@ export default SingleBlogPost;
 const ImgStyle = styled.img`
   width: 100%;
   height: 200px;
+`;
+
+const H3styles = styled.h3`
+  text-align: center;
 `;

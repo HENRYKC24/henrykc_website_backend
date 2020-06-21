@@ -15,7 +15,6 @@ class Blog extends React.Component {
     try {
       const res = await axios.get('/getBlogs');
       const postsArray = res.data;
-      console.log(postsArray);
       this.setState({
         ...this.state,
         postsArray: postsArray.reverse()
@@ -29,7 +28,6 @@ class Blog extends React.Component {
     try {
       const res = await axios.get('/showSingle/' + id);
       const singlePost = res.data;
-      console.log(singlePost);
       this.setState({
         postsArray: [singlePost]
       });
@@ -48,7 +46,6 @@ class Blog extends React.Component {
   }
 
   render() {
-    console.log(this.props)
     const {postsArray} = this.state;
     const postComponents = postsArray.map(
       (post, index) => <SingleBlogPost 
@@ -61,7 +58,7 @@ class Blog extends React.Component {
       />
     );
     return (
-      <div className="container text-center">
+      <div className="container">
         <div className="row">
           {postComponents}
         </div>
