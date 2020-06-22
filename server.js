@@ -42,20 +42,16 @@ app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.get('/getNumberOfPosts', (req, res) => {
   Post.find({}, (err, result) => {
     if( !err ) {
-      res.json({totalPosts: result.length})
+      res.json({totalPosts: result.length});
     } else {
       console.log(err)
     }
   })
 })
 
-app.get('/getBlogs/:skip', (req, res) => {
-  let skip = 0, limit = 6;
-  if( req.params.skip) {
-    skip = Number(req.params.skip);
-  } else {
-    skip = 0;
-  }
+app.get('/getBlogs/:skip/:limit', (req, res) => {
+  const skip = Number(req.params.skip);
+  const limit = Number(req.params.limit);
   Post.find({}, (err, posts) => {
     if( !err ) {
       res.json(posts);

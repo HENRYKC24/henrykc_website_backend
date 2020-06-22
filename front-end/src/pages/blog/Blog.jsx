@@ -10,8 +10,9 @@ class Blog extends React.Component {
     this.state = {
       postsArray: [],
       numberOfPosts: 0,
-      limit: 2,
+      limit: 6,
       singlePost: {},
+      activePage: 1,
       pg1: 1,
       pg2: 2,
       pg3: 3,
@@ -23,14 +24,10 @@ class Blog extends React.Component {
     this.handlePageRequest = this.handlePageRequest.bind(this);
   };
 
-  async getBlogPosts(e) {
-    let skip = 0;
-    const limit = this.state.limit;
-    if( e ) {
-      skip = Number(e.target.textContent);
-    }
+  async getBlogPosts() {
+    const skip = 0, limit = this.state.limit;
     try {
-      const res = await axios.get('/getBlogs/' + skip);
+      const res = await axios.get('/getBlogs/' + skip + '/' + limit);
       const postsArray = res.data;
       this.setState({
         ...this.state,
@@ -53,8 +50,20 @@ class Blog extends React.Component {
     }
   }
 
-  handlePageRequest(e) {
-    console.log(e);
+  async handlePageRequest(buttonNumber) {
+    const limit = this.state.limit;
+    const skip = (buttonNumber - 1) * limit;
+    try {
+      const res = await axios.get('/getBlogs/' + skip + '/' + limit);
+      const postsArray = res.data;
+      this.setState({
+        ...this.state,
+        postsArray: postsArray,
+        activePage: buttonNumber
+      });
+    } catch(err) {
+      console.log(err);
+    }
   }
 
   increasePages() {
@@ -108,7 +117,7 @@ class Blog extends React.Component {
   }
 
   render() {
-    const {postsArray, limit:l, numberOfPosts:n, pg1, pg2, pg3, pg4, pg5} = this.state;
+    const {postsArray, limit:l, numberOfPosts:n, activePage, pg1, pg2, pg3, pg4, pg5} = this.state;
     const postComponents = postsArray.map(
       (post, index) => <SingleBlogPost 
         key={index}
@@ -121,6 +130,28 @@ class Blog extends React.Component {
     );
     return (
       <div className="container mb-0">
+        <div className="d-flex justify-content-center mt-3 mb-0">
+          <nav aria-label="Page navigation">
+            <ul className="pagination text-center">
+              {(pg1 !== 1) ? <li onClick={this.decreasePages} className="page-item">
+                <Span className="page-link" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                </Span>
+              </li> : null}
+              {(((pg1 - 1) * l) < n) ? <PaginationLi btnNo={activePage} fun={this.handlePageRequest} page={pg1} /> : null}
+              {(((pg2 - 1) * l) < n) ? <PaginationLi btnNo={activePage} fun={this.handlePageRequest} page={pg2} /> : null}
+              {(((pg3 - 1) * l) < n) ? <PaginationLi btnNo={activePage} fun={this.handlePageRequest} page={pg3} /> : null}
+              {(((pg4 - 1) * l) < n) ? <PaginationLi btnNo={activePage} fun={this.handlePageRequest} page={pg4} /> : null}
+              {(((pg5 - 1) * l) < n) ? <PaginationLi btnNo={activePage} fun={this.handlePageRequest} page={pg5} /> : null}
+              
+              {(((pg5) * l) < n) ? <li onClick={this.increasePages} className="page-item">
+                <Span className="page-link" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                </Span>
+              </li>: null}
+            </ul>
+          </nav>
+        </div>
         <div className="row">
           {postComponents}
         </div>
@@ -132,11 +163,11 @@ class Blog extends React.Component {
                   <span aria-hidden="true">&laquo;</span>
                 </Span>
               </li> : null}
-              {(((pg1 - 1) * l) < n) ? <PaginationLi fun={this.handlePageRequest} page={pg1} /> : null}
-              {(((pg2 - 1) * l) < n) ? <PaginationLi fun={this.handlePageRequest} page={pg2} /> : null}
-              {(((pg3 - 1) * l) < n) ? <PaginationLi fun={this.handlePageRequest} page={pg3} /> : null}
-              {(((pg4 - 1) * l) < n) ? <PaginationLi fun={this.handlePageRequest} page={pg4} /> : null}
-              {(((pg5 - 1) * l) < n) ? <PaginationLi fun={this.handlePageRequest} page={pg5} /> : null}
+              {(((pg1 - 1) * l) < n) ? <PaginationLi btnNo={activePage} fun={this.handlePageRequest} page={pg1} /> : null}
+              {(((pg2 - 1) * l) < n) ? <PaginationLi btnNo={activePage} fun={this.handlePageRequest} page={pg2} /> : null}
+              {(((pg3 - 1) * l) < n) ? <PaginationLi btnNo={activePage} fun={this.handlePageRequest} page={pg3} /> : null}
+              {(((pg4 - 1) * l) < n) ? <PaginationLi btnNo={activePage} fun={this.handlePageRequest} page={pg4} /> : null}
+              {(((pg5 - 1) * l) < n) ? <PaginationLi btnNo={activePage} fun={this.handlePageRequest} page={pg5} /> : null}
               
               {(((pg5) * l) < n) ? <li onClick={this.increasePages} className="page-item">
                 <Span className="page-link" aria-label="Next">

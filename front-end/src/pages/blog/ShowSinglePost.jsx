@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 function ShowSinglePost() {
   const {title, post, img, time} = JSON.parse(localStorage.getItem('data'));
+  localStorage.clear();
   return(
     <div className="container">
       <div className="">
