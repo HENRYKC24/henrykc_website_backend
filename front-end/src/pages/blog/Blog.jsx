@@ -10,7 +10,7 @@ class Blog extends React.Component {
     this.state = {
       postsArray: [],
       numberOfPosts: 0,
-      limit: 6,
+      limit: 3,
       singlePost: {},
       activePage: 1,
       pg1: 1,

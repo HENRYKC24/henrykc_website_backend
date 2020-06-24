@@ -11,10 +11,10 @@ class PaginationLi extends React.Component {
     const {btnNo:b, page:p} = this.props, bool = b === p;
     return(
       <>
-        <li className={`page-item ` + (bool ? 'disabled active' : '')} onClick={() => {
+        <li className={`page-item ` + (bool ? 'disabled active active-btn' : '')} onClick={() => {
           this.props.fun(p)
         }}>
-          <button style={{backgroundColor: (bool ? '#008' : '')}} className="page-link">{p}</button>
+          <button style={{backgroundColor: (bool ? '#008' : ''),color: (bool ? '#fff' : '')}} className="page-link border1">{p}</button>
         </li>
       </>
     )

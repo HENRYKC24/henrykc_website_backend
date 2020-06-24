@@ -42,6 +42,12 @@ p {
   color: white;
 }
 
+.active-btn {
+  background-color: #008;
+  border: 1px solid;
+  border-color: #008;
+}
+
 .short {
   margin: 15px;
 }
