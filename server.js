@@ -93,7 +93,7 @@ app.post('/upload', (req, res) => {
   }
 
   const fileNameInServer = `uploaded-image-${Date.now()}${removeLeadingDots(file.name)}`;
-  file.mv(`${__dirname}/front-end/public/uploads/${fileNameInServer}`, err => {
+  file.mv(`./public/blog-images/${fileNameInServer}`, err => {
     if( err ) {
       console.log(err);
       return res.status(500).send(err);
