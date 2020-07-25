@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 const SaltRounds = 10;
 
 //connect mongoosenitoring engine, pass option { useUnifiedTopology: true }
-mongoose.connect('mongodb://localhost:27017/henryKCWebsiteDB', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb+srv://Henry:5432atlas@cluster0-jn6nw.mongodb.net/henryKCWebsiteDB', { useNewUrlParser: true, useUnifiedTopology: true });
 // create schema
 const blogSchema = {
   title: String,
@@ -129,6 +129,6 @@ app.post('/admin', (req, res) => {
   })
 })
 
-const port = 5000;
+const port = process.env.PORT || 5000;
 app.listen(port, () => console.log('Server running on port ' + port));
 
