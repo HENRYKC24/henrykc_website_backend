@@ -7,10 +7,6 @@
     "start": "node server.js",
     "heroku-postbuild": "cd client && npm install && npm run build"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/HENRYKC24/henrykc_website_backend.git"
-  },
   "author": "Engr. Henry KC",
   "license": "ISC",
   "bugs": {
