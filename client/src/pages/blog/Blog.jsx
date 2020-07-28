@@ -153,7 +153,13 @@ class Blog extends React.Component {
           </nav>
         </div>
         <div className="row">
-          {postComponents}
+          {!this.state.postsArray[0] ? 
+            <div class="d-flex justify-content-center m-auto">
+            <div class="spinner-border centered" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div> : 
+          postComponents}
         </div>
         <div className="d-flex justify-content-center mt-5 mb--3">
           <nav aria-label="Page navigation">
