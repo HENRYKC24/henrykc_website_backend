@@ -4,15 +4,14 @@
   "description": "My personal website",
   "main": "server.js",
   "scripts": {
-    "back": "nodemon server.js",
-    "front": "cd front-end && npm start",
-    "dev": "concurrently \"npm run back\" \"npm run front\""
+    "start": "node server.js",
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/HENRYKC24/henrykc_website_backend.git"
   },
-  "author": "Henry KC",
+  "author": "Engr. Henry KC",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/HENRYKC24/henrykc_website_backend/issues"
@@ -24,9 +23,7 @@
     "concurrently": "^5.2.0",
     "express": "^4.17.1",
     "express-fileupload": "^1.1.7-alpha.3",
-    "mongoose": "^5.9.18"
-  },
-  "devDependencies": {
+    "mongoose": "^5.9.18",
     "nodemon": "^2.0.4"
   }
 }
