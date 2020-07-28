@@ -11,7 +11,7 @@ function Header() {
           
             <SpanStyle 
               className="my-auto col-lg-4 col-md-4 col-sm-3 col-xs-2">
-              Henry KC
+              Henry KCb
             </SpanStyle>
 
             <SpanStyle2 
