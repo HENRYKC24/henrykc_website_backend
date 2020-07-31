@@ -14,7 +14,8 @@ class Compose extends React.Component {
       fileName: '',
       loggedInErr: false,
       uploadStatus: '',
-      uploadedImage: ''
+      uploadedImage: '',
+      previewFile: ''
     };
     this.handlePasswordInput = this.handlePasswordInput.bind(this);
     this.handleClick = this.handleClick.bind(this);
@@ -51,14 +52,33 @@ class Compose extends React.Component {
 
   handleFile(e) {
     const file = e.target.files[0];
-    this.setState(prevState => {
-      return {
-        ...prevState,
-        file: file,
-        fileName: file.name,
-        uploadStatus: ''
-      }
-    })
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      this.setState(prevState => {
+        console.log(reader.result);
+        return {
+          ...prevState,
+          previewFile: reader.result,
+          file: reader.result
+        }
+      })
+    }
+  }
+
+  previewImage(file) {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      this.setState(prevState => {
+        console.log(reader.result);
+        return {
+          ...prevState,
+          previewFile: reader.result,
+          file: reader.result
+        }
+      })
+    }
   }
 
   handlePost(e) {
@@ -82,8 +102,9 @@ class Compose extends React.Component {
       });
       return;
     }
-    const [type, extension] = this.state.file.type.split('/');
-    const wantedTypes = ['jpeg', 'gif', 'png', 'webp'];
+    const [type, extension] = this.state.file.substr(5, 10).split('/');
+    console.log(type, extension);
+    const wantedTypes = ['jpeg', 'gif;', 'png;', 'webp'];
     if( type !== 'image' || !wantedTypes.includes(extension) ) {
       this.setState({
         ...this.state,
@@ -91,15 +112,19 @@ class Compose extends React.Component {
       });
       return;
     }
-    const formData = new FormData();
-    formData.append('file', this.state.file);
-    formData.append('info', JSON.stringify({title, post}))
+    // const formData = new FormData();
+    // formData.append('file', this.state.file);
+    // formData.append('info', JSON.stringify({title, post}))
+
+    const formData = {
+      file: this.state.previewFile,
+      info: JSON.stringify({title, post})
+    }
 
     try {
-      const response = await axios.post('/upload', formData, {
+      const response = await axios.post('http://localhost:5000/upload', formData, {
         headers: {
-          "Accept": "application/json",
-          "Content-Type": "multipart/form-data"
+          "Content-Type": "application/json"
         }
       });
       const {msg, filePath} = (response.data);
@@ -139,7 +164,7 @@ class Compose extends React.Component {
 
   render() {
     return (
-      this.state.loggedIn 
+      !this.state.loggedIn 
       ?
       <div>
       <div className="container">
@@ -159,6 +184,7 @@ class Compose extends React.Component {
               id="title" 
             />
           </div>
+          
           <div className="form-group">
             <label htmlFor="title">Upload file</label>
             <input 
@@ -169,7 +195,7 @@ class Compose extends React.Component {
               id="file" 
             />
           </div>
-           
+          {this.state.previewFile && <img src={this.state.previewFile} height={100} width={130} alt="Now img"/>}
           <div className="form-group">
             <label htmlFor="post">Post</label>
             <textarea 
@@ -188,7 +214,7 @@ class Compose extends React.Component {
         </form>
         <div className="row">
 
-        {this.state.uploadedImage ? <img src={this.state.uploadedImage} alt="Now img"/> : ''}
+        
         </div>
       </div> 
         </div>

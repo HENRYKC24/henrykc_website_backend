@@ -22,7 +22,7 @@ function SingleBlogPost(props) {
     <div className='col-lg-4 col-md-4 col-sm-6'>
       <h3>{title}</h3>
       <div className=''>
-        <ImgStyle src={`/images/${img}`} alt={img} />
+        <ImgStyle src={img} alt={img} />
       </div>
       <p>{time}</p>
       <div>

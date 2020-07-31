@@ -12,7 +12,7 @@ function ShowSinglePost() {
         <hr />
         <div>
 
-        <ImgStyle src={'/images/' + img} alt={img} />
+        <ImgStyle src={img} alt={img} />
         </div>
         <p>{post}</p>
       </div>

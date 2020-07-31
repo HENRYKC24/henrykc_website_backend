@@ -154,9 +154,9 @@ class Blog extends React.Component {
         </div>
         <div className="row">
           {!this.state.postsArray[0] ? 
-            <div class="d-flex justify-content-center m-auto">
-            <div class="spinner-border centered" role="status">
-              <span class="sr-only">Loading...</span>
+            <div className="d-flex justify-content-center m-auto">
+            <div className="spinner-border centered" role="status">
+              <span className="sr-only">Loading...</span>
             </div>
           </div> : 
           postComponents}
