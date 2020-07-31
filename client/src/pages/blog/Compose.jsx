@@ -164,7 +164,7 @@ class Compose extends React.Component {
 
   render() {
     return (
-      !this.state.loggedIn 
+      this.state.loggedIn 
       ?
       <div>
       <div className="container">

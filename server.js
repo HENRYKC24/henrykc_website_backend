@@ -11,10 +11,13 @@ const {cloudinary} = require('./utils/cloudinary')
 
 
 //atlas connection
-// mongoose.connect('mongodb+srv://Henry:5432atlas@cluster0-jn6nw.mongodb.net/henryKCWebsiteDB', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb+srv://Henry:'
++ process.env.MONGO_ATLAS_PSW + 
+'@cluster0-jn6nw.mongodb.net/henryKCWebsiteDB', 
+{ useNewUrlParser: true, useUnifiedTopology: true });
 
 //local connection or heroku sandbox on deploy
-mongoose.connect( process.env.MONGODB_URI || 'mongodb://localhost:27017/henryKCWebsiteDB', { useNewUrlParser: true, useUnifiedTopology: true });
+// mongoose.connect( process.env.MONGODB_URI || 'mongodb://localhost:27017/henryKCWebsiteDB', { useNewUrlParser: true, useUnifiedTopology: true });
 
 
 // create schema
